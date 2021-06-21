@@ -26,11 +26,12 @@
 .header-container {
   display: flex;
   align-items: center;
-  background-color: #141414;
+  background-color: #181818;
   height: 100px;
   position: relative;
   /* position: fixed; */
   top: 0;
+  z-index: 2;
 }
 .header-link {
   text-decoration: none;

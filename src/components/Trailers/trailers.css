@@ -39,11 +39,15 @@
 .addtrailer-buttons {
   width: 200px;
   margin-left: 5.2%;
-  margin-top: 2%;
+  margin-top: 10%;
   display: flex;
   justify-content: space-around;
   padding-bottom: 4%;
 }
+.submit-btn {
+  cursor: pointer;
+}
+
 .addtrailer-column1 {
   height: 400px;
   width: 50%;
@@ -127,4 +131,113 @@ optgroup {
 
 .trailer-date {
   margin-right: 4px;
+}
+
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.modal-form {
+  display: flex;
+  justify-content: space-evenly;
+}
+.form-item {
+  display: flex;
+  flex-direction: column;
+}
+.modal-description-container textarea {
+  height: 100px;
+  width: 400px;
+}
+.modal-trailer-container input {
+  width: 50%;
+  margin-top: 1%;
+}
+
+.form-item input {
+  background-color: rgba(211, 211, 211, 0.6);
+  border: none;
+  height: 40px;
+  border-radius: 5px;
+  /* margin-top: 2%; */
+}
+.form-item label {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.form-item textarea {
+  background-color: rgba(211, 211, 211, 0.6);
+  border: none;
+  border-radius: 5px;
+  /* margin-top: 2%; */
+}
+.modal-trailer-container input {
+  width: 99%;
+}
+.modal-group-container {
+  display: flex;
+  justify-content: space-around;
+}
+/* .modal-title-container label {
+  margin-bottom: 5%;
+} */
+.trailer-update-button-container {
+  display: block;
+  text-align: center;
+  margin-top: 5%;
+}
+.trailer-update-button {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+.trailer-detail-span-item {
+  font-size: 15px;
+  color: white;
+}
+.trailerdetail-info-container {
+  margin-left: 5%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.trailer-detail-span {
+  font-size: 18px;
+  color: white;
+}
+.trailerdetail-info-container h3 {
+  color: red;
+}
+.back-to-trailers-btn {
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 150px;
+}
+.trailerdetails-buttons-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20%;
+}
+.edit-trailerdetails-btn {
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 150px;
 }

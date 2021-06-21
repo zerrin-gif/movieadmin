@@ -19,13 +19,14 @@ import AddTrailer from './components/Trailers/AddTrailer';
 import Footer from './components/Footer/Footer';
 import PrivacyPolicy from './components/Footer/PrivacyPolicy';
 import TermOfUse from './components/Footer/PrivacyPolicy';
+import TrailerDetails from './components/Trailers/TrailerDetails';
 
 
 function App() {
 
   const [users, setUsers] = useState([]);
   const [comments,setComments]=useState([]);
-	const [trailers, setTrailers] = useState([]);
+  const [trailers, setTrailers] = useState([]);
  
   useEffect(() => {
 		axios
@@ -42,7 +43,7 @@ function App() {
 		axios
 			.get('https://movieapp-server.herokuapp.com/comments')
 			.then((res) => {
-				console.log(res.data)
+				// console.log(res.data)
 				setComments(res.data);
 			})
 			.catch((err) => {
@@ -61,8 +62,6 @@ function App() {
 			});
 	}, []);
 
-
-
   return (
     <div className="app">
 		<Router>
@@ -71,8 +70,7 @@ function App() {
 				<Route exact path="/" component={HomePage}/>
 				<Route exact path="/dashboard" component={Dashboard}/>
 				<Route exact path="/addcategory" component={AddCategory}/>
-				<Route exact path="/addtrailer" component={AddTrailer}/>
-	
+				<Route exact path="/addtrailer" component={AddTrailer}/>	
 				<Route
 				  exact path="/userlist"
 				  render={() => <Users users={users} />}
@@ -86,12 +84,16 @@ function App() {
 				  render={() => <Ratings/>}
 				/>
 				<Route
-				  exact path="/categories"
+				  exact path="/categories" 
 				  render={() => <Categories/>}
 				/>
 				<Route
 				  exact path="/trailers"
 				  render={() => <Trailers trailers={trailers}/>}
+				/>
+				<Route
+				  exact path="/trailerdetails/:id"
+				  render={() => <TrailerDetails />}
 				/>
 				<Route
 				  exact path="/privacypolicy"

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import axios from 'axios'
 import "./trailers.css";
 
 export default function AddTrailer() {
   const [showItems, setShowItems] = useState("trailer-not-visible");
   const [movieItems, setMovieItems] = useState("trailer-visible");
+  const [image,setImage]=useState('')
+  const [banner,setBanner]=useState('')
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -19,9 +23,47 @@ export default function AddTrailer() {
       setShowItems("trailer-not-visible");
     }
   };
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    // axios
+    // .post('https://movieapp-server.herokuapp.com/trailers')
+    const formData = new FormData()
+    if(image.length!==0){
+      const formImageData = new FormData()
+      formImageData.append('file',image)
+      formImageData.append('upload_preset','movieadmin')
+      await axios.post('https://api.cloudinary.com/v1_1/movieadmin/image/upload',formImageData)
+      .then((res)=>{
+         formData.append('imageId',res.data.url)    
+      })
+      .catch((err)=>console.log(err))
+    }
+    if(banner.length!==0){
+      const formBannerData = new FormData()
+      formBannerData.append('file',banner)
+      formBannerData.append('upload_preset','movieadmin')
+      await axios.post('https://api.cloudinary.com/v1_1/movieadmin/image/upload',formBannerData)
+      .then((res)=>{
+         formData.append('bannerId',res.data.url)    
+      })
+      .catch((err)=>console.log(err))
+    }
+    const mediaId = formData.getAll('imageId').join('')
+    const bannerId = formData.getAll('bannerId').join('')
+   
+    await axios.post('https://movieapp-server.herokuapp.com/trailers',{mediaId,bannerId})
+    .then((res)=>{
+      console.log(res.data)
+    })
+    .catch((err)=>console.log(err))
+   console.log(mediaId)
+   console.log(bannerId)
+  }
+
   return (
     <div className="addtrailer-container">
-      <form className="addtrailer-form-container">
+      <form className="addtrailer-form-container" onSubmit={handleSubmit}>
         <div className="addtrailer-title-text">
           <h1>Add Trailer</h1>
         </div>
@@ -50,6 +92,12 @@ export default function AddTrailer() {
             </div>
             <div className="addtrailer-duration addtrailer-item">
               <input placeholder="Duration" />
+            </div>
+            <div className="addtrailer-duration addtrailer-item">
+              <input placeholder="Image" type="file" onChange={(e)=>{setImage(e.target.files[0])}}/>
+            </div>
+            <div className="addtrailer-duration addtrailer-item">
+              <input placeholder="Image" type="file" onChange={(e)=>{setBanner(e.target.files[0])}}/>
             </div>
           </div>
         {/* </div> */}
@@ -86,9 +134,10 @@ export default function AddTrailer() {
 
 </div>
         <div className="addtrailer-buttons">
-          <button className="addcategory-button submit-btn">Submit</button>
+          <button className="addcategory-button submit-btn" type="submit">Submit</button>
           <button className="addcategory-button cancel-btn">Cancel</button>
         </div>
+
       </form>
     </div>
   );

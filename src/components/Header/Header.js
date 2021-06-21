@@ -87,7 +87,7 @@ const openCategoryDropdown=()=>{
 
                     <div className={trailerClassname}>
                         <div className="dropdown-item"> <BsFillPersonPlusFill/> <a href="/addtrailer">Add Trailer</a></div>
-                        <div className="dropdown-item"> <BsFillEyeFill/> <a href="/trailerlist">Trailer List</a></div>
+                        <div className="dropdown-item"> <BsFillEyeFill/> <a href="/trailers">Trailer List</a></div>
                     </div>  
                     
                 </div>
