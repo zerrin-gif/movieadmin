@@ -11,11 +11,12 @@ import './table.css'
 
 
 Modal.setAppElement('#root');
+
 export default function Trailers() {
     
     
     const [data,setData]=useState([])
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalIsOpen, setModalIsOpen] = useState(false); 
     const [modalPost,setModalPost]=useState('')
     const [title,setTitle]=useState('')
     const [episodeTitle,setEpisodeTitle]=useState('')
@@ -56,10 +57,8 @@ export default function Trailers() {
             window.location.reload()
         })
         .catch(err=>{console.log(err)})
-        
-
-      
     }
+
 
     const editTrailer=async (trailerId)=>{
        await  axios

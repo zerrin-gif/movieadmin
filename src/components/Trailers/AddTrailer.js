@@ -7,6 +7,17 @@ export default function AddTrailer() {
   const [movieItems, setMovieItems] = useState("trailer-visible");
   const [image,setImage]=useState('')
   const [banner,setBanner]=useState('')
+  const [type,setType]=useState('')
+  const [title,setTitle]=useState('')
+  const [episodeTitle,setEpisodeTitle]=useState('')
+  const [year,setYear]=useState('')
+  const [duration,setDuration]=useState('')
+  const [description,setDescription]=useState('')
+  const [ageRestriction,setAgeRestriction]=useState('')
+  const [totalSeasons,setTotalSeasons]=useState('')
+  const [seasonNumber,setSeasonNumber]=useState('')
+  const [episodeNumber,setEpisodeNumber]=useState('')
+  const [trailerUrl,setTrailerUrl]=useState('')
 
 
   const handleChange = (e) => {
@@ -22,6 +33,7 @@ export default function AddTrailer() {
       setMovieItems("trailer-visible");
       setShowItems("trailer-not-visible");
     }
+    setType(e.target.value)
   };
 
   const handleSubmit=async(e)=>{
@@ -52,91 +64,90 @@ export default function AddTrailer() {
     const mediaId = formData.getAll('imageId').join('')
     const bannerId = formData.getAll('bannerId').join('')
    
-    await axios.post('https://movieapp-server.herokuapp.com/trailers',{mediaId,bannerId})
+    await axios.post('https://movieapp-server.herokuapp.com/trailers',{
+      mediaId,bannerId,type,title,duration,ageRestriction,totalSeasons,year,seasonNumber,episodeTitle,episodeNumber,trailerUrl})
     .then((res)=>{
       console.log(res.data)
     })
     .catch((err)=>console.log(err))
-   console.log(mediaId)
-   console.log(bannerId)
+
+   
   }
 
   return (
     <div className="addtrailer-container">
       <form className="addtrailer-form-container" onSubmit={handleSubmit}>
-        <div className="addtrailer-title-text">
-          <h1>Add Trailer</h1>
-        </div>
-        <div className="addtrailer-category-quality">
-          <div className="addtrailer-category addtrailer-item">
-            <select className="addtrailer-item" onChange={handleChange}>
-              <option value="">Trailer Type</option>
-              <option value="movie">Movie</option>
-              <option value="show">Show</option>
-            </select>
-          </div>
-        </div>
+                      <div className="addtrailer-title-text">
+                        <h1>Add Trailer</h1>
+                      </div>
+                      <div className="addtrailer-category-quality">
+                        <div className="addtrailer-category addtrailer-item">
+                          <select className="addtrailer-item" onChange={handleChange}>
+                            <option value="">Trailer Type</option>
+                            <option value="movie">Movie</option>
+                            <option value="show">Show</option>
+                          </select>
+                        </div>
+                      </div>
 
-<div className='addtrailer-main'>
-        <div className="addtrailer-row1">
-          <div className="addtrailer-column1">
-            <div className="addtrailer-title addtrailer-item">
-              <input placeholder="Title" />
-            </div>
+              <div className='addtrailer-main'>
+                      <div className="addtrailer-row1">
+                        <div className="addtrailer-column1">
+                          <div className="addtrailer-title addtrailer-item">
+                            <input placeholder="Title" value={title} onChange={(e)=>setTitle(e.target.value)}/>
+                          </div>
 
-            <div className="addtrailer-description addtrailer-item">
-              <input placeholder="Description" />
-            </div>
-            <div className="addtrailer-year addtrailer-item">
-              <input placeholder=" Release Year" />
-            </div>
-            <div className="addtrailer-duration addtrailer-item">
-              <input placeholder="Duration" />
-            </div>
-            <div className="addtrailer-duration addtrailer-item">
-              <input placeholder="Image" type="file" onChange={(e)=>{setImage(e.target.files[0])}}/>
-            </div>
-            <div className="addtrailer-duration addtrailer-item">
-              <input placeholder="Image" type="file" onChange={(e)=>{setBanner(e.target.files[0])}}/>
-            </div>
-          </div>
-        {/* </div> */}
-        
-        {/* <div className="addtrailer-row2"> */}
-          <div className="addtrailer-column2 addtrailer-item">
-            <div className={showItems}>
-              <div className="addtrailer-duration addtrailer-item">
-                <input placeholder="A" />
-              </div>
-              <div className="addtrailer-duration addtrailer-item">
-                <input placeholder="A" />
-              </div>
-              <div className="addtrailer-duration addtrailer-item">
-                <input placeholder="A" />
-              </div>
-            </div>
-            <div className={movieItems}>
-              <div className="addtrailer-duration addtrailer-item">
-                <input placeholder="B" />
-              </div>
-              <div className="addtrailer-duration addtrailer-item">
-                <input placeholder="B" />
-              </div>
-              <div className="addtrailer-duration addtrailer-item">
-                <input placeholder="b" />
-              </div>
-              <div className="addtrailer-duration addtrailer-item">
-                <input placeholder="b" />
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div className="addtrailer-description addtrailer-item">
+                            <input placeholder="Description" value={description} onChange={(e)=>setDescription(e.target.value)} />
+                          </div>
+                          <div className="addtrailer-year addtrailer-item">
+                            <input placeholder=" Release Year" value={year} onChange={(e)=>setYear(e.target.value)} />
+                          </div>
+                          <div className="addtrailer-duration addtrailer-item">
+                            <input placeholder="Duration" value={duration} onChange={(e)=>setDuration(e.target.value)} />
+                          </div>
+                          <div className="addtrailer-duration addtrailer-item">
+                            <input placeholder="Image" type="file" onChange={(e)=>{setImage(e.target.files[0])}}/>
+                          </div>
+                          <div className="addtrailer-duration addtrailer-item">
+                            <input placeholder="Image" type="file" onChange={(e)=>{setBanner(e.target.files[0])}}/>
+                          </div>
+                        </div>
+                      {/* </div> */}
+                      
+                      {/* <div className="addtrailer-row2"> */}
+                        <div className="addtrailer-column2 addtrailer-item">
+                          <div className={showItems}>
+                            <div className="addtrailer-duration addtrailer-item">
+                              <input placeholder="Total Number of Seasons" value={totalSeasons} onChange={(e)=>setTotalSeasons(e.target.value)} />
+                            </div>
+                            <div className="addtrailer-duration addtrailer-item">
+                              <input placeholder="Season Number" value={seasonNumber} onChange={(e)=>setSeasonNumber(e.target.value)} />
+                            </div>
+                            <div className="addtrailer-duration addtrailer-item">
+                              <input placeholder="Episode Title" value={episodeTitle} onChange={(e)=>setEpisodeTitle(e.target.value)} />
+                            </div>
+                            <div className="addtrailer-duration addtrailer-item">
+                              <input placeholder="Episode Number" value={episodeNumber} onChange={(e)=>setEpisodeNumber(e.target.value)} />
+                            </div>
+                          </div>
+                          <div className={movieItems}>
+                            <div className="addtrailer-duration addtrailer-item">
+                              <input placeholder="Age Restriction" value={ageRestriction} onChange={(e)=>setAgeRestriction(e.target.value)} />
+                            </div>
+                            <div className="addtrailer-duration addtrailer-item">
+                              <input placeholder="Traile Url" value={trailerUrl} onChange={(e)=>setTrailerUrl(e.target.value)}  />
+                            </div>
+                          
+                          </div>
+                        </div>
+                      </div>
 
-</div>
-        <div className="addtrailer-buttons">
-          <button className="addcategory-button submit-btn" type="submit">Submit</button>
-          <button className="addcategory-button cancel-btn">Cancel</button>
-        </div>
+              </div>
+                      <div className="addtrailer-buttons">
+                        <button className="addcategory-button submit-btn" type="submit">Submit</button>
+                        <button className="addcategory-button cancel-btn">Cancel</button>
+                      </div>
 
       </form>
     </div>
