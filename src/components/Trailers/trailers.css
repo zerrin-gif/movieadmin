@@ -241,3 +241,9 @@ optgroup {
   height: 40px;
   width: 150px;
 }
+.additional-info-items {
+  margin-top: 15%;
+}
+.additional-info-items-show {
+  margin-top: 10%;
+}
